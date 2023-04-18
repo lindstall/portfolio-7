@@ -1,0 +1,136 @@
+---
+title: "portfolio 7"
+output: html_document
+date: "2023-04-17"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(readxl)
+library(ggplot2)
+library(dplyr)
+df <- read_excel("/Users/lindsaystall/Downloads/PIRUS_Public_May2020.xlsx")
+df[df == -99 | df == -88] <- NA
+```
+
+```{r}
+ggplot(df, aes(x = Social_Media_Frequency)) +
+  geom_histogram(binwidth = 0.5, fill = "dodgerblue4", color = "black") +
+  labs(title = "Social Media Frequency of Those in Terrorist Organizations",
+       x = "Frequency",
+       y = "Count") +
+  scale_x_continuous(breaks = c(1,2,3,4,5),
+                     labels = c("Rarely","Sporadically","Occasionally","Frequently","Continually")) +
+  scale_y_continuous(breaks = seq(0,100,20)) +
+  theme_minimal() +
+  theme(legend.position = "right")
+```
+
+
+
+Of the individuals who there is evidence that online social media played a role in the individual’s radicalization and/or mobilization, most individuals engaged in social media-related activity related to radicalization and/or mobilization frequently and occasionally.
+
+```{r}
+df_filtered_RFR <- df[df$Radicalization_Far_Right == 1,]
+
+ggplot(df_filtered_RFR, aes(x = Social_Media_Frequency)) +
+  geom_histogram(binwidth = 0.5, fill = "dodgerblue4", color = "black") +
+  labs(title = "Social Media Frequency of Far Right Terrorists",
+       x = "Frequency",
+       y = "Count") +
+  scale_x_continuous(breaks = c(1,2,3,4,5),
+                     labels = c("Rarely","Sporadically","Occasionally","Frequently","Continually")) +
+  scale_y_continuous(breaks = seq(0,100,20)) +
+  theme_minimal() +
+  theme(legend.position = "right")
+```
+
+```{r}
+df_filtered_RFL <- df[df$Radicalization_Far_Left == 1,]
+
+ggplot(df_filtered_RFL, aes(x = Social_Media_Frequency)) +
+  geom_histogram(binwidth = 0.5, fill = "dodgerblue4", color = "black") +
+  labs(title = "Social Media Frequency of Far Left Terrorists",
+       x = "Frequency",
+       y = "Count") +
+  scale_x_continuous(breaks = c(1,2,3,4,5),
+                     labels = c("Rarely","Sporadically","Occasionally","Frequently","Continually")) +
+  scale_y_continuous(breaks = seq(0,100,20)) +
+  theme_minimal() +
+  theme(legend.position = "right")
+```
+
+
+Far left terrorists use social media a lot more variably than other terrorists.
+
+
+```{r}
+df_filtered_RI <- df[df$Radicalization_Islamist == 1,]
+
+ggplot(df_filtered_RI, aes(x = Social_Media_Frequency)) +
+  geom_histogram(binwidth = 0.5, fill = "dodgerblue4", color = "black") +
+  labs(title = "Social Media Frequency of Islamic Terrorist",
+       x = "Frequency",
+       y = "Count") +
+  scale_x_continuous(breaks = c(1,2,3,4,5),
+                     labels = c("Rarely","Sporadically","Occasionally","Frequently","Continually")) +
+  scale_y_continuous(breaks = seq(0,100,20)) +
+  theme_minimal() +
+  theme(legend.position = "right")
+```
+
+```{r}
+df_filtered_RSI <- df[df$Radicalization_Single_Issue == 1,]
+
+ggplot(df_filtered_RSI, aes(x = Social_Media_Frequency)) +
+  geom_histogram(binwidth = 0.5, fill = "dodgerblue4", color = "black") +
+  labs(title = "Social Media Frequency of Single Issue Terrorists",
+       x = "Frequency",
+       y = "Count") +
+  scale_x_continuous(breaks = c(1,2,3,4,5),
+                     labels = c("Rarely","Sporadically","Occasionally","Frequently","Continually")) +
+  scale_y_continuous(breaks = seq(0,100,20)) +
+  theme_minimal() +
+  theme(legend.position = "right")
+```
+
+```{r}
+df %>%
+  filter(Radicalization_Far_Right == 1) %>%
+  count(Social_Media_Platform1) %>%
+  mutate(Social_Media_Platform1 = factor(Social_Media_Platform1, levels = c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28"), labels = c("Facebook", "Twitter", "YouTube", "Vimeo", "Instagram", "Flickr", "Tumblr", "Imgur", "Snapchat", "Google Plus", "Skype", "LinkedIn", "MySpace", "4chan", "Reddit", "Ask.fm", "WhatsApp", "Surespot", "Telegram", "Kik", "Paltalk", "VK", "Diaspora", "JustPaste.it", "SoundCloud", "Personal blogging websites", "Other non-encrypted software", "Other encrypted software/unspecified encrypted software"))) %>%
+  arrange(desc(n))
+```
+```{r}
+df %>%
+  filter(Radicalization_Far_Left == 1) %>%
+  count(Social_Media_Platform1) %>%
+  mutate(Social_Media_Platform1 = factor(Social_Media_Platform1, levels = c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28"), labels = c("Facebook", "Twitter", "YouTube", "Vimeo", "Instagram", "Flickr", "Tumblr", "Imgur", "Snapchat", "Google Plus", "Skype", "LinkedIn", "MySpace", "4chan", "Reddit", "Ask.fm", "WhatsApp", "Surespot", "Telegram", "Kik", "Paltalk", "VK", "Diaspora", "JustPaste.it", "SoundCloud", "Personal blogging websites", "Other non-encrypted software", "Other encrypted software/unspecified encrypted software"))) %>%
+  arrange(desc(n))
+```
+
+```{r}
+df %>%
+  filter(Radicalization_Islamist == 1) %>%
+  count(Social_Media_Platform1) %>%
+  mutate(Social_Media_Platform1 = factor(Social_Media_Platform1, levels = c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28"), labels = c("Facebook", "Twitter", "YouTube", "Vimeo", "Instagram", "Flickr", "Tumblr", "Imgur", "Snapchat", "Google Plus", "Skype", "LinkedIn", "MySpace", "4chan", "Reddit", "Ask.fm", "WhatsApp", "Surespot", "Telegram", "Kik", "Paltalk", "VK", "Diaspora", "JustPaste.it", "SoundCloud", "Personal blogging websites", "Other non-encrypted software", "Other encrypted software/unspecified encrypted software"))) %>%
+  arrange(desc(n))
+```
+
+```{r}
+df %>%
+  filter(Radicalization_Single_Issue == 1) %>%
+  count(Social_Media_Platform1) %>%
+  mutate(Social_Media_Platform1 = factor(Social_Media_Platform1, levels = c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28"), labels = c("Facebook", "Twitter", "YouTube", "Vimeo", "Instagram", "Flickr", "Tumblr", "Imgur", "Snapchat", "Google Plus", "Skype", "LinkedIn", "MySpace", "4chan", "Reddit", "Ask.fm", "WhatsApp", "Surespot", "Telegram", "Kik", "Paltalk", "VK", "Diaspora", "JustPaste.it", "SoundCloud", "Personal blogging websites", "Other non-encrypted software", "Other encrypted software/unspecified encrypted software"))) %>%
+  arrange(desc(n))
+```
+
+Across all terrorist types, Facebook, Youtube, and Twitter were the most common social media platforms that played a role in the individual’s radicalization and/or mobilization process.
+
+
+
+
+
+
+
