@@ -16,7 +16,7 @@ df[df == -99 | df == -88] <- NA
 
 ```{r}
 ggplot(df, aes(x = Social_Media_Frequency)) +
-  geom_histogram(binwidth = 0.5, fill = "dodgerblue4", color = "black") +
+  geom_histogram(binwidth = 0.5, fill = "powderblue", color = "black") +
   labs(title = "Social Media Frequency of Those in Terrorist Organizations",
        x = "Frequency",
        y = "Count") +
@@ -35,7 +35,7 @@ Of the individuals who there is evidence that online social media played a role 
 df_filtered_RFR <- df[df$Radicalization_Far_Right == 1,]
 
 ggplot(df_filtered_RFR, aes(x = Social_Media_Frequency)) +
-  geom_histogram(binwidth = 0.5, fill = "dodgerblue4", color = "black") +
+  geom_histogram(binwidth = 0.5, fill = "powderblue", color = "black") +
   labs(title = "Social Media Frequency of Far Right Terrorists",
        x = "Frequency",
        y = "Count") +
@@ -50,7 +50,7 @@ ggplot(df_filtered_RFR, aes(x = Social_Media_Frequency)) +
 df_filtered_RFL <- df[df$Radicalization_Far_Left == 1,]
 
 ggplot(df_filtered_RFL, aes(x = Social_Media_Frequency)) +
-  geom_histogram(binwidth = 0.5, fill = "dodgerblue4", color = "black") +
+  geom_histogram(binwidth = 0.5, fill = "powderblue", color = "black") +
   labs(title = "Social Media Frequency of Far Left Terrorists",
        x = "Frequency",
        y = "Count") +
@@ -69,7 +69,7 @@ Far left terrorists use social media a lot more variably than other terrorists.
 df_filtered_RI <- df[df$Radicalization_Islamist == 1,]
 
 ggplot(df_filtered_RI, aes(x = Social_Media_Frequency)) +
-  geom_histogram(binwidth = 0.5, fill = "dodgerblue4", color = "black") +
+  geom_histogram(binwidth = 0.5, fill = "powderblue", color = "black") +
   labs(title = "Social Media Frequency of Islamic Terrorist",
        x = "Frequency",
        y = "Count") +
@@ -84,7 +84,7 @@ ggplot(df_filtered_RI, aes(x = Social_Media_Frequency)) +
 df_filtered_RSI <- df[df$Radicalization_Single_Issue == 1,]
 
 ggplot(df_filtered_RSI, aes(x = Social_Media_Frequency)) +
-  geom_histogram(binwidth = 0.5, fill = "dodgerblue4", color = "black") +
+  geom_histogram(binwidth = 0.5, fill = "powderblue", color = "black") +
   labs(title = "Social Media Frequency of Single Issue Terrorists",
        x = "Frequency",
        y = "Count") +
@@ -127,10 +127,3 @@ df %>%
 ```
 
 Across all terrorist types, Facebook, Youtube, and Twitter were the most common social media platforms that played a role in the individual’s radicalization and/or mobilization process.
-
-
-
-
-
-
-
